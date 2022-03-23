@@ -7,6 +7,24 @@
   "directories": {
     "test": "test"
   },
+  "author": "Benedek Racz",
+  "license": "Apache-2.0",
+  "keywords": [
+    "vcd",
+    "waveform",
+    "waveform-viewer",
+    "hdl",
+    "verilog",
+    "vhdl",
+    "simulation"
+  ],
+  "scripts": {
+    "build": "npx webpack --mode development",
+    "clean": "rm -rf dist",
+    "lint": "npx eslint --ignore-pattern dist . || true",
+    "test": "npx mocha src/test/**/*js"
+  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
@@ -19,28 +37,5 @@
     "webpack": "^5.13.0",
     "webpack-cli": "^4.3.1",
     "webpack-dev-server": "^3.11.2"
-  },
-  "scripts": {
-    "test": "npx mocha js/test/**/*js",
-    "dev": "webpack --mode development"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/raczben/fliplot.git"
-  },
-  "keywords": [
-    "vcd",
-    "waveform",
-    "waveform-viewer",
-    "hdl",
-    "verilog",
-    "vhdl",
-    "simulation"
-  ],
-  "author": "Benedek Racz",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/raczben/fliplot/issues"
-  },
-  "homepage": "https://github.com/raczben/fliplot#readme"
+  }
 }

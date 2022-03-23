@@ -17,7 +17,7 @@
   <script src="https://d3js.org/d3.v5.js" charset="utf-8"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-  <script src="js/jquery.ui.touch-punch.min.js"></script>
+  <script src="public/jquery.ui.touch-punch.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/jstree.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.2/jquery.contextMenu.min.js"></script>
@@ -37,6 +37,7 @@
             <li><a href="#" id="fileopenmenu">Open</a></li>
           </ul>
         </li>
+      </ul>
       <ul class="nav navbar-nav">
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Debug<span
               class="caret"></span></a>
@@ -137,9 +138,9 @@
             </div>
             <button id="add-analog" type="button" class="btn btn-primary navbar-btn">+Analog</button>
             <button id="wiki" type="button" class="btn btn-primary navbar-btn demo-file-button"
-              data-file="test/wiki.vcd">Send wiki.vcd</button>
+              data-file="examples/wiki.vcd">Send wiki.vcd</button>
             <button id="Axi" type="button" class="btn btn-primary navbar-btn demo-file-button"
-              data-file="test/AxiRegTC_test_write.vcd">AxiReg.vcd</button>
+              data-file="examples/AxiRegTC_test_write.vcd">AxiReg.vcd</button>
           </div>
           <div class="tool-group-name">
             <div>
@@ -166,7 +167,7 @@
         <div id="names-col-container" class="wave-table resizable-col">
           <div id="names-col-container-scroll">
             <!-- <ul id="names-col" class="wave-table"> -->
-              <!--
+            <!--
               <li class="signal-name">Name1</li>
               <li class="signal-name highlight-row">CLK1</li>
               <li class="signal-name">Data</li>

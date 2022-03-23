@@ -19,9 +19,9 @@ export class WaveTable {
     this.wave = new Wave(this);
 
     $('#main-container-scroll-y')
-      .scroll( () => this.wave.updateAxis() );
+      .scroll(() => this.wave.updateAxis());
     $(window)
-      .resize( () => this.wave.updateAxis() );
+      .resize(() => this.wave.updateAxis());
   }
 
   reload() {
@@ -34,7 +34,7 @@ export class WaveTable {
     this.wave.reload();
   }
 
-  refresh(){
+  refresh() {
     this.nameCol.refresh();
     this.valueCol.refresh();
     this.wave.refresh();
@@ -92,13 +92,13 @@ export class WaveTable {
     this.valueCol.removeRow(rowId);
     this.wave.removeRow(rowId);
   }
-  
-  removeRows(rowIds){
-    if(rowIds === undefined){
+
+  removeRows(rowIds) {
+    if (rowIds === undefined) {
       rowIds = this.getSelectedRows();
     }
     rowIds.forEach(element => {
-        this.removeRow(element);
+      this.removeRow(element);
     });
   }
 
@@ -139,7 +139,7 @@ export class WaveTable {
       if (Object.prototype.hasOwnProperty.call(this.simDB.objects, key)) {
         if (this.simDB.objects[key].type == SimulationObject.Type.SIGNAL) {
           this.insertWaveSignal(key.split("."));
-  }
+        }
       }
     }
   }
@@ -158,7 +158,7 @@ export class WaveTable {
     return this.tree.getChildren(parent, traverse, field, hidden);
   }
 
-  getRow({id, content = false}) {
+  getRow({ id, content = false }) {
     const n = this.get(id);
     return content ? n.data : n;
   }
@@ -196,12 +196,12 @@ export class WaveTable {
       this.tree.get(element).forEach((n) => {
         n.data.setRadix(radix);
       });
-        this.valueCol.setRadix(element);
-        this.wave.setRadix(element);
+      this.valueCol.setRadix(element);
+      this.wave.setRadix(element);
     });
   }
 
-  moveCursorTo(time){
+  moveCursorTo(time) {
     this.wave.moveCursorTo(time);
     this.valueCol.showValuesAt(time);
   }
@@ -210,20 +210,20 @@ export class WaveTable {
     return this.wave.getCursorTime();
   }
 
-  
-  zoomFit(){
+
+  zoomFit() {
     this.wave.zoomFit();
   }
 
-  zoomAutoscale(){
+  zoomAutoscale() {
     this.wave.zoomAutoscale();
   }
-  
-  zoomIn(){
+
+  zoomIn() {
     this.wave.zoomIn();
   }
 
-  zoomOut(){
+  zoomOut() {
     this.wave.zoomOut();
   }
 }

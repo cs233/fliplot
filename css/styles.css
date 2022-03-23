@@ -1,15 +1,15 @@
 
 
 /***********************************************************
- * 
+ *
  *    Basic styles
  *
  ***********************************************************/
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -21,7 +21,7 @@ html {
 
 
 /***********************************************************
- * 
+ *
  *    Page main layout
  *
  ***********************************************************/
@@ -34,7 +34,7 @@ html, body{
 }
 
 body {
-  display: flex; 
+  display: flex;
   flex-direction: column;
 }
 
@@ -98,18 +98,18 @@ footer {
   height: 20px;
   color: #aaa;
   font-size: 11px;
-  margin-top:auto; 
+  margin-top:auto;
 }
 
 
 /***********************************************************
- * 
+ *
  *    The navigation bar aka. menubar
  *
  ***********************************************************/
 
 .navbar-inverse{
-  background-color: #444; 
+  background-color: #444;
 }
 
 .toolbar{
@@ -141,7 +141,7 @@ footer {
 
 
 /***********************************************************
- * 
+ *
  *    Signal names and values column
  *
  ***********************************************************/
@@ -155,7 +155,7 @@ footer {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
+
   font-family: sans-serif;
   height: 24px;
   line-height: 24px; /* same as height! */
@@ -193,7 +193,7 @@ input {
 
 
 /***********************************************************
- * 
+ *
  *    SVG styles for signals
  *
  ***********************************************************/
@@ -223,7 +223,7 @@ text.bus-value{
 
 /**
  * Signal highlighter:
- * 
+ *
  * There are several ways to highlight a signal.
  *   1: Change color using d3 selections in js
  *   2: stronger-stroke:
@@ -281,7 +281,7 @@ rect.time-grid-shadow-rect {
   #navbar-menubar-normal{
     display: none;
   }
-  
+
 }
 
 @media only screen and (max-width: 999px) {

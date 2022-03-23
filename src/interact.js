@@ -112,7 +112,7 @@ function vcdpy2simDb(parsedContent) {
 }
 
 $.ajax({
-  url: "defaults.json",
+  url: "public/defaults.json",
   dataType: "json",
   success: function (data) {
     config = data;

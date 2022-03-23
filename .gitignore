@@ -1,6 +1,8 @@
 # Based on https://github.com/github/gitignore/blob/master/Node.gitignore
 
 __pycache__/*
+.venv
+venv/
 
 # Logs
 logs

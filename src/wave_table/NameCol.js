@@ -1,18 +1,18 @@
 import { WaveTable } from "./WaveTable.js";
 
 export class NameCol {
-  constructor(waveTable, init=true) {
+  constructor(waveTable, init = true) {
     /** @type {string} */
     this.containerName = '#names-col-container-scroll';
     /** @type {WaveTable} */
     this.waveTable = waveTable;
 
-    if(init){
+    if (init) {
       this.init();
     }
   }
 
-  init(){
+  init() {
     const self = this;
 
     $(this.containerName).jstree("destroy").empty();
@@ -49,7 +49,7 @@ export class NameCol {
     });
 
     setTimeout(() => {
-      
+
       this.reload();
     }, 100);
 
@@ -77,7 +77,7 @@ export class NameCol {
     }, 10);
   }
 
-  refresh(){
+  refresh() {
     this._getTree().refresh();
   }
 
@@ -132,21 +132,21 @@ export class NameCol {
     this._getTree().rename_node(this.toId(rowId), name);
   }
 
-  toId(rowId){
+  toId(rowId) {
     return `signal-name-${rowId}`;
   }
 
-  _getTree(arg = true){
+  _getTree(arg = true) {
     return $(this.containerName).jstree(arg);
   }
 
-  get_node(rowId){
+  get_node(rowId) {
     return this._getTree().get_node(this.toId(rowId));
   }
 
-  editName(rowId){
-    const nameEditorId="nameeditorinput";
-    const nameEditorId2=`#${nameEditorId}`;
+  editName(rowId) {
+    const nameEditorId = "nameeditorinput";
+    const nameEditorId2 = `#${nameEditorId}`;
     const li = $(`#${this.toId(rowId)}`);
     li.find('a').toggle();
     li.find('div').toggle();
@@ -157,27 +157,27 @@ export class NameCol {
         if (e.which == 13) {
           this.editNameEnd(rowId);
         }
-        if(e.which == 27){
+        if (e.which == 27) {
           this.editNameEnd(rowId, false);
         }
       })
-      .focusout( e=>{
+      .focusout(e => {
         this.editNameEnd(rowId, false);
-      } );
+      });
     li.append(input);
     input.focus();
     input[0].setSelectionRange(0, 1000);
   }
-  
 
-  editNameEnd(rowId, accept=true){
+
+  editNameEnd(rowId, accept = true) {
     const li = $(`#${this.toId(rowId)}`);
     const input = li.find('input');
     const val = input.val();
     input.remove();
     li.find('a').toggle();
     li.find('div').toggle();
-    if(accept){
+    if (accept) {
       this.waveTable.rename(rowId, input.val());
     }
   }

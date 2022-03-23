@@ -1,4 +1,4 @@
-import { config, simDB} from "../interact.js";
+import { config, simDB } from "../interact.js";
 import { isInt, wrap_fast } from "../core/util.js";
 import { WaveTable } from "./WaveTable.js";
 
@@ -66,12 +66,12 @@ export class Wave {
         // Or use touch gesture on touch devices
         () => d3.event.ctrlKey | d3.event.type.startsWith("touch"))
       .on("end", this.zoom_end.bind(this));
-      
+
     const mainGr = d3.select('#mainGr');
 
     mainGr.append('g')
-    .attr('id', 'grid-gr');
-  
+      .attr('id', 'grid-gr');
+
     mainGr.append('g')
       .attr('id', 'signals-table');
 
@@ -82,10 +82,10 @@ export class Wave {
       .attr('id', 'cursorGr');
   }
 
-  reload(render=false) {
-    
+  reload(render = false) {
+
     d3.select('#mainGr').selectAll("g").selectAll("*").remove();
-    
+
     const time_axis_gr_container = d3.select('#time-axis-gr-container');
 
     time_axis_gr_container.append('rect')
@@ -94,11 +94,11 @@ export class Wave {
       .attr('y', 0)
       .attr('width', this.initialTimeScale(simDB.now))
       .attr('height', 20);
-      
+
     time_axis_gr_container.append('g')
       .attr('id', 'time-axis-gr');
 
-    const rowsToPlot = this.waveTable.getRows({hidden:false, content:true});
+    const rowsToPlot = this.waveTable.getRows({ hidden: false, content: true });
 
     d3.select('#mainSVG')
       .attr('width', simDB.now + 200)
@@ -157,7 +157,7 @@ export class Wave {
       self.waveTable.moveCursorTo(click_time);
     });
 
-    if(render){
+    if (render) {
       this.zoom.scaleBy(d3.select("#wave-axis-container"), 1.0);
     }
   }
@@ -168,7 +168,7 @@ export class Wave {
   clearAll() {
   }
 
-  selectRow(rowId, select=true) {
+  selectRow(rowId, select = true) {
     d3.selectAll(`${this.rowClass}.${rowId}`).classed('highlighted-signal', select);
   }
 
@@ -179,17 +179,17 @@ export class Wave {
   moveRow(rowId, pos) {
     this.reOrderSignals();
   }
-    
+
   /**
    * Re-order the signals in the waveform.
    *
    * Updates the signals' order in both names-col-container-scroll, values-col and mainGr
-   * 
+   *
    * @param {Object} signals contains the signals in the *wanted* order
    */
   reOrderSignals() {
     d3.select('#mainSVG').selectAll('.signalRow')
-      .data(this.waveTable.getRows({hidden:false, content:true}), d=>d.id)
+      .data(this.waveTable.getRows({ hidden: false, content: true }), d => d.id)
       .order()
       .attr('transform', (d, i) => {
         return `translate(0, ${i * config.rowHeight})`
@@ -206,7 +206,7 @@ export class Wave {
 
   insertRow(rowId, parent, pos) {
     const signalsTable = d3.select('#signals-table');
-    const rowsToPlot = this.waveTable.getRows({hidden:false, content:true});
+    const rowsToPlot = this.waveTable.getRows({ hidden: false, content: true });
 
     const signalRow = signalsTable.selectAll('.signalRow')
       .data(rowsToPlot, row => row.id)
@@ -223,7 +223,7 @@ export class Wave {
 
   removeRow(rowId) {
     d3.selectAll('.signalRow').filter(
-      d => !(this.waveTable.getRows({hidden:false, content:true}).includes(d))
+      d => !(this.waveTable.getRows({ hidden: false, content: true }).includes(d))
     ).remove();
     this.reOrderSignals()
   }
@@ -237,14 +237,14 @@ export class Wave {
   rename(rowId, name) {
   }
 
-  setRadix(rowId){
+  setRadix(rowId) {
     // this.reload(true)
   }
 
   /******************************************************************************
-   * 
+   *
    * EXPORTED API FUNCTIONS
-   * 
+   *
    ******************************************************************************/
 
   /**
@@ -279,7 +279,7 @@ export class Wave {
    * Autoscale: scale to show enough detail for humans
    */
   zoomAutoscale() {
-    var rows = this.waveTable.getRows({hidden:false, content:true});
+    var rows = this.waveTable.getRows({ hidden: false, content: true });
 
     if (rows.length > 0) {
       // Average wave change times
@@ -309,7 +309,7 @@ export class Wave {
 
   /**
    * Updates the render-range.
-   * 
+   *
    * The render range contains the time/pixel range which must be rendered. (which are visible)
    */
   updateRenderRange() {
@@ -336,15 +336,15 @@ export class Wave {
   updateAxis() {
     const rangeWidth = this.renderTimeScale.range()[1] - this.renderTimeScale.range()[0];
 
-    var bottom = $('#main-container-scroll-y').innerHeight()+$('#main-container-scroll-y').scrollTop();
+    var bottom = $('#main-container-scroll-y').innerHeight() + $('#main-container-scroll-y').scrollTop();
 
     bottom = Math.min($('#wave-axis-container')[0].clientHeight, bottom);
 
     d3.select('#grid-gr')
-      .attr('transform', `translate(0, ${bottom-20})`);
-    
+      .attr('transform', `translate(0, ${bottom - 20})`);
+
     d3.select('#time-axis-gr-container')
-      .attr('transform', () => `translate(0, ${bottom-20})`);
+      .attr('transform', () => `translate(0, ${bottom - 20})`);
 
     this.x_grid
       .tickSize(-$('#mainSVG').height())
@@ -362,14 +362,14 @@ export class Wave {
   }
 
   /******************************************************************************
-   * 
+   *
    * D3 CALLBACK FUNCTIONS
-   * 
+   *
    ******************************************************************************/
 
   /**
    * Zoom end called after the d3 zoom event.
-   * 
+   *
    * `end` event is emitted when no wheel events are received for 150ms.
    * This function do an exact render.
    */
@@ -380,7 +380,7 @@ export class Wave {
 
   /**
    * Called by the d3 zoom at all zoom event.
-   * 
+   *
    * zoom_fast do sort and fast transformation. The exact re-render is done by the zoom_end at the
    * end of the zoom.
    */
@@ -456,7 +456,7 @@ export class Wave {
 
   /**
    * Render the given signal
-   * 
+   *
    * @param {d3 Object} signalWaveSVG is the d3 object to be render
    */
   drawWave(timeScaleGroup) {
@@ -496,7 +496,7 @@ export class Wave {
 
       // horizontal aka. timeholder:
       var timeholders = signalWaveSVG.selectAll('.timeholder')
-        .data(waveChangesIndex, d=> d[IDX]);
+        .data(waveChangesIndex, d => d[IDX]);
 
       timeholders.exit().remove();
 
@@ -506,7 +506,7 @@ export class Wave {
 
       // vertical aka. valuechanger
       var valuechanger = signalWaveSVG.selectAll('.valuechanger')
-        .data(waveChangesIndex.slice(1), d=> d[IDX]);
+        .data(waveChangesIndex.slice(1), d => d[IDX]);
 
       valuechanger.exit().remove();
 
@@ -516,7 +516,7 @@ export class Wave {
 
       // transparent rect
       var transRect = signalWaveSVG.selectAll('.transparent-rect')
-        .data(waveChangesIndex, d=> d[IDX]);
+        .data(waveChangesIndex, d => d[IDX]);
 
       transRect.exit().remove();
 
@@ -549,11 +549,11 @@ export class Wave {
 
     } else if (rowData.waveStyle == 'bus') {
       var busPath = signalWaveSVG.selectAll('path')
-        .data(waveChangesIndex, d=> d[IDX]);
+        .data(waveChangesIndex, d => d[IDX]);
 
       // signalValuesSVG.selectAll('.bus-value-group').remove();
       var busValue = signalValuesSVG.selectAll('.bus-value-group')
-        .data(waveChangesIndex, d=> d[IDX]);
+        .data(waveChangesIndex, d => d[IDX]);
 
       busPath.exit().remove();
       busValue.exit().remove();
@@ -572,7 +572,7 @@ export class Wave {
         .style("stroke", d => value2Color(d[WAVEARRAY].getValueAtI(d[IDX])))
         .style("fill", d => value2Color(d[WAVEARRAY].getValueAtI(d[IDX])))
         .style("stroke-width", "2")
-      
+
       signalWaveSVG.selectAll('.bus-path')
         .attr('d', d => {
           var ret = '';
@@ -620,12 +620,12 @@ export class Wave {
    * @param {Signal} signal a wave change element, to filter
    * @return {boolean} true if the waveChange element inside the rendering region.
    */
-  waveIInRenderRange(signal, i){
+  waveIInRenderRange(signal, i) {
     var t0 = signal.getTimeAtI(i),
-      t1 = signal.getTimeAtI(i+1),
+      t1 = signal.getTimeAtI(i + 1),
       domainMin = d3.min(this.renderTimeScale.domain()),
       domainMax = d3.max(this.renderTimeScale.domain());
-  
+
     return t0 <= domainMax && t1 >= domainMin;
   }
 
