@@ -2,6 +2,7 @@ import { SimDB } from "./core/SimDB.js";
 
 import { ObjectTree } from "./ObjectTree.js";
 import { WaveTable } from "./wave_table/WaveTable.js";
+import VCDParser from "vcd-parser";
 
 // TODO should be moved somewhere else.
 export var config = {};
@@ -201,6 +202,34 @@ function toggleHighlightSignal(signalID, enableZeroSelection = false) {
   }
 }
 
+function formatVCDData(filename, data) {
+  let children = [];
+  for (const signal of data.signal) {
+    let obj = {
+      type: signal.type,
+      vcdid: signal.refName,
+      width: parseInt(signal.size),
+      references: [signal.name],
+      wave: []
+    };
+    const hierarcy = obj.references[0].split(".");
+    obj.name = hierarcy[hierarcy.length - 1];
+    for (const tv of signal.wave) {
+      obj.wave.push({
+        time: parseInt(tv[0]),
+        bin: tv[1]
+      });
+    }
+    children.push(obj);
+  }
+  return {
+    children: children,
+    name: filename,
+    now: parseInt(data.endtime) - 1,
+    type: "struct"
+  };
+}
+
 function openFile(event) {
   var input = event.target;
   var reader = new FileReader();
@@ -208,17 +237,33 @@ function openFile(event) {
   reader.onload = function (evt) {
     console.log(evt.target.result);
 
-    $.ajax({
-      url: "parse-vcd",
-      type: "POST",
-      data: JSON.stringify({
-        fname: input.files[0].name,
-        content: evt.target.result,
-      }),
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      success: initShow,
-    });
+    VCDParser.parse(evt.target.result)
+      .then(data => {
+        console.log("vcd-parser original data:");
+        console.log(data);
+
+        const filename = input.files[0].name;
+        const formatted = formatVCDData(filename, data);
+        console.log("vcd-parser formatted data:");
+        console.log(formatted);
+
+        initShow(formatted);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+
+    // $.ajax({
+    //   url: "parse-vcd",
+    //   type: "POST",
+    //   data: JSON.stringify({
+    //     fname: input.files[0].name,
+    //     content: evt.target.result,
+    //   }),
+    //   contentType: "application/json; charset=utf-8",
+    //   dataType: "json",
+    //   success: initShow,
+    // });
   };
 }
 

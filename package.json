@@ -19,12 +19,15 @@
     "simulation"
   ],
   "scripts": {
-    "build": "npx webpack --mode development",
+    "build": "npx webpack --mode=development",
+    "watch": "npx webpack --mode=development --watch",
     "clean": "rm -rf dist",
     "lint": "npx eslint --ignore-pattern dist . || true",
     "test": "npx mocha src/test/**/*js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "vcd-parser": "file:../vcd-parser"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",

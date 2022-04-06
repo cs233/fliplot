@@ -13,9 +13,13 @@ See demo at: http://raczben.pythonanywhere.com/
 
 Here are the basic steps to start development.
 
-### Start development server
+### Requirements
 
 Requires nodejs `>=14.18.0` and python `>=3.9`.
+
+For parsing vcd files, we use our [vcd-parser](https://github.com/cs233/vcd-parser) library which is included in Fliplot as a local dependency. Clone the `cs233/vcd-parser` repo into the same directory where you will clone this Fliplot repo (i.e. it should be side-by-side with `fliplot` and not inside it).
+
+### Start development server
 
  0. Clone and enter to this repo.
  1. Install javascript dependencies: `npm i`
