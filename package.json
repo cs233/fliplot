@@ -1,5 +1,6 @@
 {
   "name": "fliplot",
+  "publisher": "cs233illinois",
   "version": "1.0.0",
   "description": "HTML based waveform viewer for HDL simulators",
   "private": true,
@@ -18,7 +19,24 @@
     "vhdl",
     "simulation"
   ],
+  "main": "./src/extension.cjs",
+  "engines": {
+    "vscode": "^1.45.0"
+  },
+  "activationEvents": [
+    "onCommand:fliplot.start"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "fliplot.start",
+        "title": "Start fliplot session",
+        "category": "Fliplot"
+      }
+    ]
+  },
   "scripts": {
+    "vscode:prepublish": "npx webpack --mode=production",
     "build": "npx webpack --mode=development",
     "watch": "npx webpack --mode=development --watch",
     "clean": "rm -rf dist",
@@ -31,6 +49,8 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
+    "@types/vscode": "^1.45.0",
+    "@types/vscode-webview": "^1.45.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "chai": "^4.2.0",
