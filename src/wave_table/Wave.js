@@ -449,7 +449,9 @@ export class Wave {
     if (this.dbg_enableRender) {
       d3.selectAll('.signalRow')
         .each(function () {
-          self.drawWave(d3.select(this));
+          setTimeout(() => {
+            self.drawWave(d3.select(self));
+          }, 0);
         });
     }
   }
