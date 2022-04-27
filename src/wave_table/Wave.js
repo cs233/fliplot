@@ -450,7 +450,7 @@ export class Wave {
       d3.selectAll('.signalRow')
         .each(function () {
           setTimeout(() => {
-            self.drawWave(d3.select(self));
+            self.drawWave(d3.select(this));
           }, 0);
         });
     }
