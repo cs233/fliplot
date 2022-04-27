@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "description": "HTML based waveform viewer for HDL simulators",
   "private": true,
-  "type": "module",
   "directories": {
     "test": "test"
   },
@@ -19,7 +18,7 @@
     "vhdl",
     "simulation"
   ],
-  "main": "./src/extension.cjs",
+  "main": "./out/extension.js",
   "engines": {
     "vscode": "^1.45.0"
   },
@@ -36,11 +35,11 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npx webpack --mode=production",
-    "build": "npx webpack --mode=development",
+    "vscode:prepublish": "npx tsc & npx webpack --mode=production",
+    "build": "npx tsc & npx webpack --mode=development",
     "watch": "npx webpack --mode=development --watch",
-    "clean": "rm -rf dist",
-    "lint": "npx eslint --ignore-pattern dist . || true",
+    "clean": "rm -rf out",
+    "lint": "npx eslint --ignore-pattern out . || true",
     "test": "npx mocha src/test/**/*js"
   },
   "dependencies": {
@@ -57,6 +56,7 @@
     "eslint": "^7.11.0",
     "jshint": "^2.12.0",
     "mocha": "^8.2.1",
+    "typescript": "^4.6.3",
     "webpack": "^5.13.0",
     "webpack-cli": "^4.3.1",
     "webpack-dev-server": "^3.11.2"

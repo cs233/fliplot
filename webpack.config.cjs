@@ -1,5 +1,10 @@
+const path = require('path');
+
 module.exports = {
   entry: './src/interact.js',
+  output: {
+    path: path.resolve(__dirname, 'out')
+  },
   module: {
     rules: [
       {
