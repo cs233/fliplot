@@ -12,12 +12,12 @@
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/themes/default/style.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.2/jquery.contextMenu.min.css">
-  <link rel="stylesheet" href="${mainCssUri}">
+  <link rel="stylesheet" href="${resourcesDir}/css/styles.css">
 
   <script src="https://d3js.org/d3.v5.js" charset="utf-8"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-  <script src="${publicDir}/jquery.ui.touch-punch.min.js"></script>
+  <script src="${resourcesDir}/lib/jquery.ui.touch-punch.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/jstree.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.2/jquery.contextMenu.min.js"></script>
@@ -25,7 +25,7 @@
 
   <script>
     window.Fliplot = {
-      publicDir: "${publicDir}"
+      resourcesDir: "${resourcesDir}"
     };
   </script>
   <script type="module" src="${mainJsUri}"></script>
