@@ -113,7 +113,7 @@ function vcdpy2simDb(parsedContent) {
 }
 
 $.ajax({
-  url: window.Fliplot.publicDir + "/defaults.json",
+  url: window.Fliplot.resourcesDir + "/defaults.json",
   dataType: "json",
   success: function (data) {
     config = data;

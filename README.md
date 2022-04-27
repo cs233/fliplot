@@ -7,7 +7,7 @@ make Fliplot *scriptable*, *pluginable*, *portable*.
 
 See demo at: http://raczben.pythonanywhere.com/
 
-![Demo of using http://raczben.pythonanywhere.com/](etc/demo.gif)
+![Demo of using http://raczben.pythonanywhere.com/](demo.gif)
 
 # Contribution
 

@@ -18,20 +18,17 @@ export function activate(context: vscode.ExtensionContext) {
 
 function loadWebviewContent(context: vscode.ExtensionContext, webview: vscode.Webview) {
   const extensionUri = context.extensionUri;
-  let mainCssUri = vscode.Uri.joinPath(extensionUri, "css", "styles.css");
+  let resourcesDir = vscode.Uri.joinPath(extensionUri, "resources");
   let mainJsUri = vscode.Uri.joinPath(extensionUri, "out", "main.js");
-  let publicDir = vscode.Uri.joinPath(extensionUri, "public");
-  mainCssUri = webview.asWebviewUri(mainCssUri);
+  let resourcesUri = webview.asWebviewUri(resourcesDir);
   mainJsUri = webview.asWebviewUri(mainJsUri);
-  publicDir = webview.asWebviewUri(publicDir);
 
-  const indexHtmlPath = vscode.Uri.joinPath(extensionUri, "index.tmpl.html");
+  const indexHtmlPath = vscode.Uri.joinPath(resourcesDir, "index.html");
   vscode.workspace.fs.readFile(indexHtmlPath)
     .then(bytes => {
       const content = new TextDecoder().decode(bytes)
-          .replaceAll("${mainCssUri}", mainCssUri.toString())
-          .replaceAll("${mainJsUri}", mainJsUri.toString())
-          .replaceAll("${publicDir}", publicDir.toString());
+          .replaceAll("${resourcesDir}", resourcesUri.toString())
+          .replaceAll("${mainJsUri}", mainJsUri.toString());
       webview.html = content;
     }, err => {
       console.error("error while loading index html file:", err);
