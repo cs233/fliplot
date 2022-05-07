@@ -42,14 +42,13 @@
     "lint": "npx eslint --ignore-pattern out . || true",
     "test": "npx mocha src/test/**/*js"
   },
-  "dependencies": {
-    "vcd-parser": "file:../vcd-parser"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@types/vscode": "^1.45.0",
     "@types/vscode-webview": "^1.45.0",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "chai": "^4.2.0",

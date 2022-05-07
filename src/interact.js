@@ -1,8 +1,8 @@
 import { SimDB } from "./core/SimDB.js";
 
 import { ObjectTree } from "./ObjectTree.js";
+import { VcdParser } from "./vcd-parser";
 import { WaveTable } from "./wave_table/WaveTable.js";
-import VCDParser from "vcd-parser";
 
 // TODO should be moved somewhere else.
 export var config = {};
@@ -105,12 +105,12 @@ $("#fileopenmenu").click(() => {
 
 $("#file-open-shadow").on("change", openFile);
 
-function vcdpy2simDb(parsedContent) {
-  parsedContent["signals"] = parsedContent["children"];
-  delete parsedContent["children"];
-
-  return parsedContent;
-}
+// function vcdpy2simDb(parsedContent) {
+//   parsedContent["signals"] = parsedContent["children"];
+//   delete parsedContent["children"];
+//
+//   return parsedContent;
+// }
 
 $.ajax({
   url: window.Fliplot.resourcesDir + "/defaults.json",
@@ -128,8 +128,9 @@ $.ajax({
 });
 
 function initShow(data) {
-  console.log(data);
-  simDB.init(vcdpy2simDb(data));
+  // console.log(data);
+  // simDB.init(vcdpy2simDb(data));
+  simDB.init(data);
   waveTable.addAllWaveSignal();
   simDB.updateDBInitialX();
   const tree = new ObjectTree(waveTable);
@@ -202,56 +203,26 @@ function toggleHighlightSignal(signalID, enableZeroSelection = false) {
   }
 }
 
-function formatVCDData(filename, data) {
-  let children = [];
-  for (const signal of data.signal) {
-    let obj = {
-      type: signal.type,
-      vcdid: signal.refName,
-      width: parseInt(signal.size),
-      references: [signal.name],
-      wave: []
-    };
-    const hierarcy = obj.references[0].split(".");
-    obj.name = hierarcy[hierarcy.length - 1];
-    for (const tv of signal.wave) {
-      obj.wave.push({
-        time: parseInt(tv[0]),
-        bin: tv[1]
-      });
-    }
-    children.push(obj);
-  }
-  return {
-    children: children,
-    name: filename,
-    now: parseInt(data.endtime) - 1,
-    type: "struct"
-  };
-}
-
 function openFile(event) {
   var input = event.target;
   var reader = new FileReader();
   reader.readAsText(input.files[0], "UTF-8");
   reader.onload = function (evt) {
-    console.log(evt.target.result);
+    const filename = input.files[0].name;
+    const content = evt.target.result;
+    console.log("filename: ", filename);
+    console.log(content);
 
-    VCDParser.parse(evt.target.result)
-      .then(data => {
-        console.log("vcd-parser original data:");
-        console.log(data);
+    setTimeout(() => {
+      const parser = new VcdParser();
+      const data = parser.parse(content);
+      data['name'] = filename;
 
-        const filename = input.files[0].name;
-        const formatted = formatVCDData(filename, data);
-        console.log("vcd-parser formatted data:");
-        console.log(formatted);
+      console.log("parsed vcd data:")
+      console.log(data);
 
-        initShow(formatted);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+      initShow(data);
+    }, 0);
 
     // $.ajax({
     //   url: "parse-vcd",

@@ -9,27 +9,55 @@ See demo at: http://raczben.pythonanywhere.com/
 
 ![Demo of using http://raczben.pythonanywhere.com/](demo.gif)
 
-# Contribution
+# Getting Started
 
 Here are the basic steps to start development.
 
 ### Requirements
 
-Requires nodejs `>=14.18.0` and python `>=3.9`.
+Requires nodejs `>=14.18.0` (and python `>=3.9`).
 
-For parsing vcd files, we use our [vcd-parser](https://github.com/cs233/vcd-parser) library which is included in Fliplot as a local dependency. Clone the `cs233/vcd-parser` repo into the same directory where you will clone this Fliplot repo (i.e. it should be side-by-side with `fliplot` and not inside it).
+This project is a vscode extension so you need to have vscode installed. You
+should also do local development within vscode itself to take advantage of
+features for debugging extensions.
 
-### Start development server
+Lastly, install javascript dependencies using: `npm install`.
 
- 0. Clone and enter to this repo.
- 1. Install javascript dependencies: `npm i`
- 2. Bundle js sources: `npx webpack --mode=development --watch` 
- 3. Create and activate a new python virtual-environment (optional): `python3 -m  virtualenv .venv` `./.venv/bin/activate`
- 4. Install python dependencies: `pip install flask`
- 5. Start flask server:
-    
-```bash
- export FLASK_APP=flask_app
- export FLASK_ENV=development
- flask run 
-```
+### Debugging extension
+
+The main way to "run" this project is to open vscode with this extension
+installed. This is already setup as a vscode launch task (see
+`.vscode/launch.json`).
+
+1. Open the top-level folder in vscode, if not already.
+2. Compile code: `npm run build`.
+3. Navigate to the "Run and Debug" panel on sidebar.
+4. Select "Run Extension" and click Run (green arrow).
+
+A new vscode window should open with this extension enabled. You might find it
+useful to have devtools console open (Help > Toggle Developer Tools).
+
+### Start Python server
+
+This used to be a Python app. It doesn't quite work anymore since most parts
+has been ported to vscode extension, but you can still try out the Python
+server.
+
+1. (optional) Create and activate a new python virtual-environment (or use conda):
+    ```bash
+    python3 -m virtualenv .venv
+    ./.venv/bin/activate
+    ```
+2. Install python dependencies: `pip install flask`
+3. Start flask server:
+    ```bash
+     export FLASK_APP=flask_app
+     export FLASK_ENV=development
+     flask run
+    ```
+4. You can now make requests to the server:
+    ```bash
+    curl -X POST 'http://localhost:5000/parse-vcd' \
+      -H 'content-type: application/json' \
+      -d '{"fname": "examples/sample.vcd"}'
+    ```

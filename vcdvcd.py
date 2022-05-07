@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import math
+import json
 
 class VCDVCD(object):
 
@@ -148,6 +149,9 @@ class VCDVCD(object):
                     references_to_ids[reference] = identifier_code
                     if print_dumps:
                         cur_sig_vals[identifier_code] = 'x'
+        # print(json.dumps(self._data, indent=2))
+        # print(json.dumps(self._signals, indent=2))
+        # print("endtime: ", self._endtime)
 
     def get_data(self):
         """

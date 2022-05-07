@@ -20,7 +20,14 @@ module.exports = {
             ]
           }
         }
+      },
+      {
+        test: /\.ts$/,
+        loader: 'awesome-typescript-loader'
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.ts']
   }
 };
