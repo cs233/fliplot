@@ -1,13 +1,17 @@
 # fliplot
 
-HTML based waveform viewer for HDL simulators.
+Fliplot is an alternative to GTKWave, but implemented as a VS Code extension
+using HTML and JavaScript/TypeScript.
 
-Fliplot is an alternative to GTKWave, but this is implemented in HTML, Javascript and Python, which
-make Fliplot *scriptable*, *pluginable*, *portable*.
+Part of the student experience in CS 233 is implementing datapaths in Verilog
+and using a waveform viewer for debugging. Traditionally, we've been using
+GTKWave, but asking students to install it proved difficult. We've tried
+offering GTKWave via a Ubuntu workspace in PrairieLearn but that also has its
+problems. Therefore, the goal of the Fliplot project is to offer a waveform
+viewer as a vscode extension so students can easily use it within a vscode
+workspace in PrairieLearn (alongside editing Verilog code).
 
-See demo at: http://raczben.pythonanywhere.com/
-
-![Demo of using http://raczben.pythonanywhere.com/](demo.gif)
+![](demo.gif)
 
 # Getting Started
 
@@ -15,7 +19,7 @@ Here are the basic steps to start development.
 
 ### Requirements
 
-Requires nodejs `>=14.18.0` (and python `>=3.9`).
+Requires nodejs `>=14.18.0` (and optionally python `>=3.9`).
 
 This project is a vscode extension so you need to have vscode installed. You
 should also do local development within vscode itself to take advantage of
@@ -23,7 +27,7 @@ features for debugging extensions.
 
 Lastly, install javascript dependencies using: `npm install`.
 
-### Debugging extension
+### Run/Debug extension
 
 The main way to "run" this project is to open vscode with this extension
 installed. This is already setup as a vscode launch task (see
@@ -37,7 +41,7 @@ installed. This is already setup as a vscode launch task (see
 A new vscode window should open with this extension enabled. You might find it
 useful to have devtools console open (Help > Toggle Developer Tools).
 
-### Start Python server
+### Start Python server (deprecated)
 
 This used to be a Python app. It doesn't quite work anymore since most parts
 has been ported to vscode extension, but you can still try out the Python
